@@ -32,6 +32,16 @@ const token = urlParams.get('token');
 const expiry = urlParams.get('expiry')
 log("token: " + token);
 log("expiry: " + expiry);
+
+log("User clicked write button");
+
+  try {
+    const ndef = new NDEFReader();
+    await ndef.write("{'name':'Arif', 'token':'12345', 'expiry':'20220605'}");
+    log("> Message written");
+  } catch (error) {
+    log("Argh! " + error);
+  }
 </script>
 
 {% include js_snippet.html filename='index.js' %}
