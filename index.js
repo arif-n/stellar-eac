@@ -33,7 +33,7 @@ log("name: " + name);
 log("access: " + access);
   try {
     const ndef = new NDEFReader();
-    await ndef.write(string.concat(token, name, accesslevel, expiry));
+    await ndef.write(string.concat(token, name, access, expiry));
     log("> Message written");
   } catch (error) {
     log("Argh! " + error);
