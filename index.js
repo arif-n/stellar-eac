@@ -57,7 +57,7 @@ ndef.onreading = async (event) => {
   try {
     await ndef.write({ records: [textRecord] });
   } catch(error) {
-    console.log(`Write failed :-( try again: ${error}.`);
+    log(`Write failed :-( try again: ${error}.`);
   }
 };
 });
