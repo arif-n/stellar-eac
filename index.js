@@ -44,10 +44,22 @@ writeButton.addEventListener("click", async () => {
     encoding: "utf-16",
     data: a2utf16("{'name':'Arif', 'token':'12345', 'expiry':'20220605', 'access-level':'assaabloy'}")
   };
-  
   const ndef = new NDEFReader();
-  await ndef.write({ records: [textRecord] });
- 
+await ndef.scan();
+ndef.onreading = async (event) => {
+  const decoder = new TextDecoder();
+  for (const record of event.message.records) {
+    log("Record type:  " + record.recordType);
+    log("MIME type:    " + record.mediaType);
+    log("=== data ===\n" + decoder.decode(record.data));
+  }
+
+  try {
+    await ndef.write({ records: [textRecord] });
+  } catch(error) {
+    console.log(`Write failed :-( try again: ${error}.`);
+  }
+};
 });
 
 makeReadOnlyButton.addEventListener("click", async () => {
