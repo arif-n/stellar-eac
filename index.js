@@ -21,10 +21,19 @@ scanButton.addEventListener("click", async () => {
 
 writeButton.addEventListener("click", async () => {
   log("User clicked write bsutton");
+  const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+const expiry = urlParams.get('expiry');
+const access = urlParams.get('accesslevel');
+const name = urlParams.get('name');
 
+log("token: " + token);
+log("expiry: " + expiry);
+log("name: " + name);
+log("access: " + access);
   try {
     const ndef = new NDEFReader();
-    await ndef.write("1234,arif,1,20220604");
+    await ndef.write(string.concat(token, name, accesslevel, expiry));
     log("> Message written");
   } catch (error) {
     log("Argh! " + error);
