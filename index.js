@@ -34,7 +34,7 @@ log("access: " + access);
 var payload = ""
   try {
     const ndef = new NDEFReader();
-    await ndef.write(payload.concat(token, name, access, expiry));
+    await ndef.write(payload.concat(token,",", name,",", access,",", expiry));
     log("> Message written");
   } catch (error) {
     log("Argh! " + error);
