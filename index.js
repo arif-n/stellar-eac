@@ -37,7 +37,7 @@ makeReadOnlyButton.addEventListener("click", async () => {
   try {
     const ndef = new NDEFReader();
     await ndef.makeReadOnly();
-    log("> NFC tag has been made permanently read-only");
+    log("> NFC tag has been made permanggently read-only");
   } catch (error) {
     log("Argh! " + error);
   }
