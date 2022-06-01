@@ -9,6 +9,7 @@ check_min_version: true
 
 <button id="scanButton">Scan</button>
 
+{% include output_helper.html initial_output_content=initial_output_content %}
 
 <script>
 log = ChromeSamples.log;
@@ -16,6 +17,11 @@ log = ChromeSamples.log;
 if (!("NDEFReader" in window))
   ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
 
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+const expiry = urlParams.get('expiry')
+log("token: " + token);
+log("expiry: " + expiry);
 </script>
 
 {% include js_snippet.html filename='index.js' %}
