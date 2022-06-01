@@ -13,22 +13,41 @@ scanButton.addEventListener("click", async () => {
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
       log(`> Serial Number: ${serialNumber}`);
       log(`> Records: (${message.records.length})`);
+      log(`> Text: (${message.records[0]})`)
     });
   } catch (error) {
     log("Argh! " + error);
   }
 });
 
+
+function readTextRecord(record) {
+  console.assert(record.recordType === "text");
+  const textDecoder = new TextDecoder(record.encoding);
+  console.log(`Text: ${textDecoder.decode(record.data)} (${record.lang})`);
+}
+
 writeButton.addEventListener("click", async () => {
   log("User clicked write button");
 
-  try {
-    const ndef = new NDEFReader();
-    ndef.write("{name:Arif, token:12345, expiry:20220605, access-level:assaabloy}");
-    log("> Message written");
-  } catch (error) {
-    log("Argh! " + error);
+  function a2utf16(string) {
+    let result = new Uint16Array(string.length);
+    for (let i = 0; i < string.length; i++) {
+      result[i] = string.codePointAt(i);
+    }
+    return result;
   }
+  
+  const textRecord = {
+    recordType: "text",
+    lang: "en",
+    encoding: "utf-16",
+    data: a2utf16("{'name':'Arif', 'token':'12345', 'expiry':'20220605', 'access-level':'assaabloy'}")
+  };
+  
+  const ndef = new NDEFReader();
+  await ndef.write({ records: [textRecord] });
+ 
 });
 
 makeReadOnlyButton.addEventListener("click", async () => {
