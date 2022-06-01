@@ -51,7 +51,7 @@ ndef.onreading = async (event) => {
   for (const record of event.message.records) {
     log("Record type:  " + record.recordType);
     log("MIME type:    " + record.mediaType);
-    log("=== data ===\n" + decoder.decode(record.data));
+    log("=== data===\n" + decoder.decode(record.data));
   }
 
   try {
