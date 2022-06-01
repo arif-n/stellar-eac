@@ -24,7 +24,7 @@ writeButton.addEventListener("click", async () => {
 
   try {
     const ndef = new NDEFReader();
-    await ndef.write("{'name':'Arif', 'token':'12345', 'expiry':'20220605'}");
+    await ndef.write("{'name':'Arif', 'token':'12345', 'expiry':'20220605', 'access-level':'assaabloy'}");
     log("> Message written");
   } catch (error) {
     log("Argh! " + error);
