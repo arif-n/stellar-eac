@@ -20,7 +20,7 @@ scanButton.addEventListener("click", async () => {
 });
 
 writeButton.addEventListener("click", async () => {
-  log("User clicked write button");
+  log("User clicked write bsutton");
 
   try {
     const ndef = new NDEFReader();
